@@ -21,7 +21,7 @@ class Rectangle{
         double getPerimeter(){return 2*(height+width);}
         void setHeight(double h){height = h;}
         void setWidth(double w){width = w;}
-        void setSide(double s){side = s;}
+        void setSide(double s);
         void setColor(string c){color = c;}
         bool isSimilar(Rectangle r);
 };
@@ -35,14 +35,16 @@ Rectangle::Rectangle(double h, double w){
     width = w;
 }
 Rectangle::Rectangle(double s){
-    side = s;
+    height = width = s;
 }
 Rectangle::Rectangle(string c){
     color = c;
 }
 
 bool Rectangle::isSimilar(Rectangle r){
-    if(height == r.height && width == r.width && color == r.color){
+    if( (height == r.getHeight() || height == r.getWidth())
+        && (width == r.getWidth() || width == r.getHeight())
+        && color == r.color){
         return true;
     }else{
         return false;
@@ -51,8 +53,8 @@ bool Rectangle::isSimilar(Rectangle r){
 
 int main(){
     Rectangle r1(2,3,"Green");
-    Rectangle r2(2,3,"Green");
+    Rectangle r2(3,2,"Green");
     Rectangle r11(2,3,"Yellow");
 
-    cout<<r1.isSimilar(r11);
+    cout<<r1.isSimilar(r2);
 }
