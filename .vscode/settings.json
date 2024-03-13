@@ -8,6 +8,9 @@
         "span": "cpp",
         "regex": "cpp",
         "random": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "string": "cpp"
     }
 }

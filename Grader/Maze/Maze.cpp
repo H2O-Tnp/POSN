@@ -10,7 +10,7 @@ void sol(int y, int x,vector<vector<int>>& vec){
     if(vec[y][x]==0){
         if(y>0){
             sol(y-1,x,vec);
-        }x
+        }
         if(x>0){
             sol(y,x-1,vec);
         }
