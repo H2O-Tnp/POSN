@@ -3,7 +3,7 @@
 using namespace std;
 int main()
 {
-    // initializer list
+    // initializer stack
     vector<int> vector1 = {1, 2, 3, 4, 5};
     // uniform initialization
     vector<int> vector2{6, 7, 8, 9, 10};

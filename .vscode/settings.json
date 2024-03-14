@@ -26,6 +26,8 @@
         "valarray": "cpp",
         "numeric": "cpp",
         "ratio": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "deque": "cpp",
+        "vector": "cpp"
     }
 }
