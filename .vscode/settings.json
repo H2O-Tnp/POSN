@@ -11,6 +11,21 @@
         "sstream": "cpp",
         "new": "cpp",
         "ostream": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "scoped_allocator": "cpp",
+        "cstdlib": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "complex": "cpp",
+        "future": "cpp",
+        "limits": "cpp",
+        "memory": "cpp",
+        "optional": "cpp",
+        "thread": "cpp",
+        "type_traits": "cpp",
+        "valarray": "cpp",
+        "numeric": "cpp",
+        "ratio": "cpp",
+        "*.tcc": "cpp"
     }
 }

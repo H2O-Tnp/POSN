@@ -1,59 +1,118 @@
 #include <bits/stdc++.h>
 using namespace std;
+class Triangle
+{
+private:
+    double height = 1.0;
+    double base = 1.0;
+    string color = "black";
+    bool equal = false;
 
-class Triangle{
-    private: 
-        double height = 1.0;
-        double base = 1.0;
-        string color = "black";
-    public:
-        Triangle(double height, double width, string color);
-        Triangle(double height, double width);
-        Triangle(double side);
-        Triangle(string color);
-        Triangle();
+public:
+    // con
+    Triangle(double b, double h, string str);
+    Triangle(double b, double h);
+    Triangle(double side, string str);
+    Triangle(double side);
+    Triangle(string col) { color = col; }
+    Triangle();
 
-        double getHeight(){return height;}
-        double getWidth(){return base;}
-        string getColor(){return color;}
-        double getArea(){return height*base;}
-        double getPerimeter(){return 2*(height+base);}
-        void setHeight(double h){height = h;}
-        void setWidth(double w){base = w;}
-        void setSide(double s){side = s;}
-        void setColor(string c){color = c;}
-        bool isSimilar(Triangle r);
+    // getter
+    double getHeight() { return height; }
+    double getBase() { return base; }
+    string getColor() { return color; }
+    double getArea() { return 0.5 * base * height; }
+    double getPerimeter();
+
+    // setter
+    void setH(double x) { height = x; }
+    void setB(double x) { base = x; }
+    void setColor(string str) { color = str; }
+
+    // Check
+    bool isEquilateral();
+    bool iscolor(string str);
+    bool isSameColor(Triangle &t);
+    bool isBigger(Triangle &t);
+    bool isSmaller(Triangle &t);
+
+    void copyFrom(Triangle &t);
 };
-Triangle::Triangle(double h, double w, string c){
+Triangle::Triangle(double b, double h, string str)
+{
+    base = b;
     height = h;
-    base = w;
-    color = c;
+    color = str;
 }
-Triangle::Triangle(double h, double w){
+Triangle::Triangle(double b, double h)
+{
+    base = b;
     height = h;
-    base = w;
+};
+Triangle::Triangle(double side, string str)
+{
+    base = side;
+    height = sqrt(3) * 0.5 * side;
+    color = str;
+};
+Triangle::Triangle(double side)
+{
+    base = side;
+    height = sqrt(3) * 0.5 * side;
+};
+double Triangle::getPerimeter()
+{
+    if (isEquilateral() == true)
+        return base * 3;
+    else
+        return 0.0;
 }
-Triangle::Triangle(double s){
-    base = s;
-}
-Triangle::Triangle(string c){
-    color = c;
-}
-
-bool Triangle::isSimilar(Triangle r){
-    if( (height == r.getHeight() || height == r.getWidth())
-        && (base == r.getWidth() || base == r.getHeight())
-        && color == r.color){
+bool Triangle::isEquilateral()
+{
+    if (height / base == sqrt(3) / 2)
         return true;
-    }else{
+    else
         return false;
-    }
+}
+bool Triangle::iscolor(string str)
+{
+    if (color == str)
+        return true;
+    else
+        return false;
+}
+bool Triangle::isSameColor(Triangle &t)
+{
+    if (color == t.getColor())
+        return true;
+    else
+        return false;
+}
+bool Triangle::isBigger(Triangle &t)
+{
+    if (getArea() > t.getArea())
+        return true;
+    else
+        return false;
+}
+bool Triangle::isSmaller(Triangle &t)
+{
+    if (getArea() < t.getArea())
+        return true;
+    else
+        return false;
+}
+void Triangle::copyFrom(Triangle &t)
+{
+    height = t.getHeight();
+    base = t.getBase();
+    color = t.getColor();
 }
 
-int main(){
-    Triangle r1(2,3,"Green");
-    Triangle r2(2,3,"Green");
-    Triangle r11(2,3,"Yellow");
+int main()
+{
+    Triangle T1(1,2,"Red");
+    Triangle T2(2,3,"Blue");
+    cout<<T2.isSmaller(T1);
 
-    cout<<r1.isSimilar(r11);
 }
