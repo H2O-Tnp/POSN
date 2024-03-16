@@ -10,6 +10,7 @@ int main(){
         cin>>in;
         vec.push_back(in);
     }
+    // O(n^2)
     for(int src=0;src<vec.size()-1;src++){
         int idx = src;
         for(int tar=src+1;tar<vec.size();tar++){

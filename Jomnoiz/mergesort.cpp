@@ -4,6 +4,7 @@ using namespace std;
 const int MAX_N = 1e5 + 5;
 
 int a[MAX_N];
+int n;
 
 void solve(int l, int r) {
     if (l == r) return;
@@ -28,6 +29,7 @@ void solve(int l, int r) {
             j++, k++;
         }
     }
+
     while (i < L.size()) {
         a[k] = L[i];
         i++, k++;
@@ -41,7 +43,7 @@ void solve(int l, int r) {
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
 
-    int n;
+    // int n;
     cin >> n;
 
     for (int i = 1; i <= n; i++) cin >> a[i];
@@ -49,5 +51,7 @@ int main() {
     solve(1, n);
 
     for (int i = 1; i <= n; i++) cout << a[i] << ' ';
+    cout<<endl;
     return 0;
 }
+
