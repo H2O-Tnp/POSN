@@ -20,7 +20,8 @@ bool merge(int a, int b) {
 
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
-
+    // N : vertices
+    // Q : Edges
     int N, Q;
     cin >> N >> Q;
 

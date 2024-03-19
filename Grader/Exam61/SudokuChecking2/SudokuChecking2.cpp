@@ -14,22 +14,28 @@ int main(){
     int n;
     cin>>n;
     while(n--){
+        unordered_map<int,int> same(500);
+        set<int> res;
         int mode,key;
         cin>>mode>>key;
-        bool noNum = true;
+        bool noSame = true;
         if(mode==-1){
             for(int c=1;c<=9;c++){
-                if(mat[key][c]!=0){
-                    cout<<mat[key][c]<<' ';
-                    noNum=false;
+                same[mat[key][c]]++;
+                int num = same[mat[key][c]];
+                if(num==2){
+                    res.insert(mat[key][c]);
+                    noSame = false;
                 }
             }
         }
         else if(mode==1){
             for(int r=1;r<=9;r++){
-                if(mat[r][key]!=0){
-                    cout<<mat[r][key]<<' ';
-                    noNum=false;
+                same[mat[r][key]]++;
+                int num = same[mat[r][key]];
+                if(num==2){
+                    res.insert(mat[r][key]);
+                    noSame = false;
                 }
             }
         }
@@ -38,23 +44,17 @@ int main(){
             int col = ((key-1)%3 *3)+1;
             for(int r=row;r<=row+2;r++){
                 for(int c=col;c<=col+2;c++){
-                    if(mat[r][c]!=0){
-                        cout<<mat[r][c]<<' ';
-                        noNum=false;
+                    same[mat[r][c]]++;
+                    int num = same[mat[r][c]];
+                    if(num==2){
+                        res.insert(mat[r][c]);
+                        noSame = false;
                     }
                 }
             }
         }
-        if(noNum) cout<<0;
+        if(noSame) cout<<0;
+        for(auto i:res) cout<<i<<' ';
         cout<<endl;
     }
-    // int n;
-    // cin<<n;
-    // while(n--){
-    //     int in;
-    //     cin>>in;
-    //     if(in == -1){
-
-    //     }
-    // }
 }

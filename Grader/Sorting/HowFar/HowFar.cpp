@@ -13,8 +13,7 @@ int main(){
     for(int i=1;i<=n;i++){
         int in;
         cin>>in;
-        if(mp.find(mp[in])==mp.end()){
-        // if(get<0>(mp[in])==0){
+        if(mp.find(in)==mp.end()){
             get<1>(mp[in])=i;
             order.push_back(in);
         }
@@ -29,21 +28,23 @@ int main(){
     // max = test;//test
 
     // unor map key travers
-    // for(int i=1;i<=max;i++){
+    int lasti=0;
     for(auto i:order){
-        // if(find(mp[i])==mp.end()) continue;
-        if(get<0>(mp[i])==0) continue;
-        change += get<0>(mp[i-1]);
-        last = change+get<0>(mp[i]);
-        int n1 = abs(last - get<1>(mp[i]));
-        int n2 = abs(get<2>(mp[i]) - (change+1));
-        cout<<i<<' ';
-        if(n1 > n2){
-            cout<<n1<<endl;
-        }
-        else {
-            cout<<n2<<endl;
-        }
+        tuple<int,int,int> temp = mp[i];
+        change += get<0>(mp[lasti]);
+
+        int ordered_id = change+get<0>(temp);
+        vector<int> max;
+        //            num     freq, 1st last
+        //                      0    1   2
+        max.push_back(abs(ordered_id - get<1>(temp)));
+        max.push_back(abs(get<1>(temp) - (change+1)));
+        max.push_back(abs(ordered_id - get<2>(temp)));
+        max.push_back(abs(get<2>(temp) - (change+1)));
+
+        sort(max.begin(),max.end(),greater<>());
+        cout<<i<<' '<<max.front()<<endl;
+        lasti = i;
     }
 }
 
