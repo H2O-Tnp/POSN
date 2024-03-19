@@ -10,7 +10,7 @@ class Student{
             this->score = score;
             this->year = year;
         }
-        Student* next;
+        Student* next=nullptr;
 };
 
 int main(){
@@ -18,18 +18,36 @@ int main(){
     Student* start = nullptr;
     Student* last = nullptr;
     
-
-    for(int i=0;i<N;i++){
+    for(int i=N;i>=0;i--){
         // Insert data
-        Student* s = new Student(i+1, -1);
-        if(i==0){
-            start = s;
+        Student* newStudent = new Student(i+1, -1);
+
+        // Head
+        if(i==N){
+            start = newStudent;
+            last = newStudent;
         }
-        else{
-            last->next = s;
+        else if(newStudent->score < start->score){
+            newStudent->next = start;
+            start = newStudent;
+        } else {
+            Student* prev = start;
+            Student* current = start->next;
+            while(current!=nullptr){
+                if(newStudent->score < current->score){
+                    prev->next = newStudent;
+                    newStudent->next = current;
+                    break;
+                } else {
+                    prev = current;
+                    current = current->next; 
+                }
+            }
+            if(current==nullptr){
+                last->next = newStudent;
+                last = newStudent;
+            }
         }
-            
-        last = s;        
     }
 
     Student* current = start;

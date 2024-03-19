@@ -16,7 +16,7 @@ const int INF = 1e9 + 7;    // Representing infinity
 vector<pair<int, int>> adj[MAX_N];
 
 // Array to store minimum distances from source node S
-int dist[MAX_N];
+int min_dist[MAX_N];
 
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);  // Optimize input/output
@@ -34,31 +34,32 @@ int main() {
     }
 
     // Initialize all distances to infinity
-    for (int i = 1; i <= N; i++) dist[i] = INF;
+    for (int i = 1; i <= N; i++) min_dist[i] = INF;
 
     // Priority queue to store nodes and their distances for processing
     priority_queue <pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-    pq.emplace(0, S);                              // Add source node S with distance 0
-    dist[S] = 0;                                  // Set distance of source node to 0
+    pq.emplace(0, S);                               // Add source node S with distance 0
+    min_dist[S] = 0;                                    // Set distance of source node to 0
 
     // Dijkstra's algorithm
     while (!pq.empty()) {
-        auto [d, u] = pq.top();                      pq.pop();  // Extract node with highest distance
+        auto [d, u] = pq.top();                     
+        pq.pop();                                   // Extract node with highest distance
 
-        if (d > dist[u]) continue;                 // Outdated distance, skip
+        if (d > min_dist[u]) continue;                  // Outdated distance, skip
 
-        for (auto [v, w] : adj[u]) {               // Explore neighbors of u
-            if (dist[u] + w < dist[v]) {           // If a shorter path is found through u
-                dist[v] = dist[u] + w;             // Update distance of neighbor v
-                pq.emplace(dist[v], v);          // Add neighbor v with updated distance to queue
+        for (auto [v, w] : adj[u]) {                // Explore neighbors of u
+            if (min_dist[u] + w < min_dist[v]) {            // If a shorter path is found through u
+                min_dist[v] = min_dist[u] + w;              // Update distance of neighbor v
+                pq.emplace(min_dist[v], v);             // Add neighbor v with updated distance to queue
             }
         }
     }
 
     // Print the minimum distances (or -1 if unreachable)
     for (int i = 1; i <= N; i++) {
-        if (dist[i] == INF) cout << "-1 ";      
-        else cout << dist[i] << ' ';
+        if (min_dist[i] == INF) cout << "-1 ";      
+        else cout << min_dist[i] << ' ';
     }
 
     return 0;
