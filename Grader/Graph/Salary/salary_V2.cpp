@@ -8,8 +8,8 @@ long long sal[MAX_N];
 int n;
 
 void DFS(int u) {
-    cout<<"DFS "<<u<<endl;
-    for(int i=1;i<=n;i++) cout<<"Node "<<i<<" Sal "<<sal[i]<<endl;
+    // cout<<"DFS "<<u<<endl;
+    // for(int i=1;i<=n;i++) cout<<"Node "<<i<<" Sal "<<sal[i]<<endl;
     for (auto v : adj[u]) {
         sal[v] += sal[u];
         DFS(v);
@@ -33,6 +33,5 @@ int main() {
         sal[u] += in;
     }
     DFS(1);
-
     for(int i=1;i<=n;i++) cout<<sal[i]<<' ';
 }

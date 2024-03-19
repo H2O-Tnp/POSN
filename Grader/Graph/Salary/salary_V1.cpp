@@ -12,8 +12,8 @@ void dfs(int u,long long bonus[]) {
     // add bonus to parent node
     sal[u] += bonus[u];
 
-    cout<<"DFS "<<u<<endl;
-    for(int i=1;i<=n;i++) cout<<"Node "<<i<<" Sal "<<sal[i]<<endl;
+    // cout<<"DFS "<<u<<endl;
+    // for(int i=1;i<=n;i++) cout<<"Node "<<i<<" Sal "<<sal[i]<<endl;
 
     for (auto v : adj[u]) {
         if (visited[v] == false) {
