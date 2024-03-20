@@ -36,7 +36,7 @@ int main() {
     }
 
     std::sort(vec.begin(), vec.end(), Comparator());
-    printData(vec);
+    // printData(vec);
     vec.push_back(Number(-2, -1)); // This is a 'sentinel' to make last element handling easier.
 
     int current = -1;

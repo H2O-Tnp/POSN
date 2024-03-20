@@ -11,13 +11,9 @@ int sub(vector<vector<int>> &image){
                 break;
             }
         }
-        if(!all){
-            break;
-        }
+        if(!all) break;
     }
-    if(all){
-        return 2;
-    }
+    if(all) return 2;
 
     int len = 1;
     for(int i=0;i<n;i+=(n/2)){
