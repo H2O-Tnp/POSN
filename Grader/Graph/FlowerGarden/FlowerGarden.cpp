@@ -38,12 +38,17 @@ int main(){
     cin>>n;
     for(int i=1;i<=n;i++){
         tuple<int,int,int> temp;
+        //           y             x
         cin>>get<0>(temp)>>get<1>(temp);
+        //        id : i
         get<2>(temp)=i;
         flow.emplace_back(temp);
     }
 
+
+    // Y sort
     sort(flow.begin(),flow.end(),Comp_y);
+
     tuple<int,int,int> last_flow = flow.front();
     for(auto i=flow.begin()++;i!=flow.end();i++){
         if(get<0>(*i) == get<0>(last_flow)){
