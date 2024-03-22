@@ -19,6 +19,7 @@ void print(list<Stu> q){
 }
 
 int main(){
+    cin.tie(nullptr)->sync_with_stdio(false);
     int c,s;
     cin>>c>>s;
     list<Stu> q;

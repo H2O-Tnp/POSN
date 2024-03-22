@@ -26,7 +26,7 @@ int main() {
     int N, M, S;
     // cin >> N >> M >> S;
     N=9;
-    S=2;
+    S=0;
     addEdge(0, 1, 4);
     addEdge(0, 7, 8);
     addEdge(1, 2, 8);
