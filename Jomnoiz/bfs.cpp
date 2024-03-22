@@ -34,7 +34,7 @@ int main() {
 
         order.push_back(u);
         for (auto v : adj[u]) {
-            if (visited[v] == false) {
+            if (!visited[v]) {
                 visited[v] = true;
                 q.push(v);
             }
