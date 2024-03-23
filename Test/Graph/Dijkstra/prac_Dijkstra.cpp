@@ -5,7 +5,7 @@ const int MAX_N = 1e5+5;
 const int INF = 1e9;
 
 vector<pair<int, int>> adj[MAX_N];
-int min_dis[MAX_N];
+int max_dis[MAX_N];
 int par[MAX_N];
 
 
@@ -46,31 +46,31 @@ int main(){
     // }
     // INF all dis
     for(int i=1-1;i<=n-1;i++){
-        min_dis[i]=INF;
+        max_dis[i]=INF;
     }
 
     priority_queue<pair<int, int>,vector<pair<int, int>>,greater<pair<int, int>>> pq;
     pq.emplace(0,start);
-    min_dis[start] = 0; // !!!
+    max_dis[start] = 0; // !!!
     
     while(!pq.empty()){
         auto [cur_dis, ver] = pq.top();
         pq.pop();
 
-        if(cur_dis > min_dis[ver]){
+        if(cur_dis > max_dis[ver]){
             continue;
         }
         for(auto [adj_ver, adj_w] : adj[ver]){
-            if(cur_dis+adj_w < min_dis[adj_ver]){
-                min_dis[adj_ver] = cur_dis+adj_w;
-                pq.emplace(min_dis[adj_ver],adj_ver);
+            if(cur_dis+adj_w < max_dis[adj_ver]){
+                max_dis[adj_ver] = cur_dis+adj_w;
+                pq.emplace(max_dis[adj_ver],adj_ver);
                 par[adj_ver] = ver;
             }
         }
     }
 
     int v=8; // end !!!
-    if (min_dis[7] == 1e9){
+    if (max_dis[7] == 1e9){
         cout<<"-1 ";
         return 0;
     }

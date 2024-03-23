@@ -30,7 +30,6 @@ int main() {
         cin >> u >> v >> w;
 
         edge.emplace_back(w, u, v);
-        // edge.push_back({w, u, v});
     }
 
     sort(edge.begin(), edge.end());
@@ -42,3 +41,12 @@ int main() {
     cout << ans;
     return 0;
 }
+
+/*
+4 5
+1 2 10
+2 4 15
+3 4 4
+3 1 6
+1 4 5
+*/
