@@ -54,8 +54,6 @@ int main(){
             if(!visited[added_r][added_c]){
                 min_i = min(min_i,added_r);
                 min_j = min(min_j,added_c);
-                
-                
             }
             q.emplace(min_i,min_j);
             visited[min_i][min_j]=true;
