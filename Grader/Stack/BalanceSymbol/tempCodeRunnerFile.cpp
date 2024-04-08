@@ -1,0 +1,1 @@
+etline(cin, in);

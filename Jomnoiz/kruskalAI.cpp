@@ -47,6 +47,7 @@ int main() {
 
     int ans = 0;  // Variable to store the total weight of the MST
     for (auto [w, u, v] : edge) {  // Iterate through sorted edges
+        parent[u]=u;
         if (merge(u, v) == true) {  // Attempt to merge sets
             ans += w;  // If merge successful, add weight to MST
         }
