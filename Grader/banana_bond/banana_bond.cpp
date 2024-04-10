@@ -12,64 +12,47 @@ bool visited[MAX_N];
 unordered_map<int,int> ans(5e5+5);
 
 int V,E,Q;
+bool invert = false;
+
+int find_root(int u){
+    if(u==parent[u]) return u;
+    return parent[u]=find_root(parent[u]);
+}
+
+bool merge(int a,int b){
+    int u=find_root(a), v=find_root(b);
+    if(u==v) return false;
+    parent[v] = u;
+    return true;
+}
 
 int countComp(){
-    for(int i=1;i<=V;i++){
-       visited[i] = false; 
-    }
-    int comp = 0;
-    for(int i=1;i<=V;i++){
-        if(visited[i]){
-            continue;
-        }
-        comp++;
-        queue<int> qu;
-        qu.emplace(i);
-        visited[i]=true;
-        while(!qu.empty()){
-            // cout<<"test\n";
-            auto u = qu.front();
-            qu.pop();
-            for(auto[v,w,id]:adj[u]){
-                if(eid[id]==false){
-                    continue;
-                }
-                if(visited[v]){
-                    continue;
-                }
-                visited[v]=true;
-                qu.emplace(v);
-            }
-        }
-    }
+    // for(int i=1;i<=V;i++){
+    //    visited[i] = false; 
+    // }
+
+    
+    
     return comp;
 }
 
 int main(){
     
     cin>>V>>E>>Q;
+    int comp = V;
     // vector<int> max_e;
     // setup
-    
     for(int i=1;i<=E;i++){
         int u,v,w;
         cin>>u>>v>>w;
         adj[u].emplace_back(v,w,i);
         adj[v].emplace_back(u,w,i);
+        if (merge(u, v) == true) comp--;
         eid[i]=true;
         pq.emplace(w,v,i);
         // pq.emplace(w,u,i);
         // max_e.emplace_back(w);
     }
-    // sort(max_e.begin(),max_e.end());
-    /*
-    while(!pq.empty()){
-        auto [w,v] = pq.top();
-        pq.pop();
-        cout<<v<<' '<<w<<"\n";
-    }
-    */
-    cout<<"numof components : "<<countComp()<<"\n";
 
     // main process
     while(!pq.empty()){
@@ -85,6 +68,7 @@ int main(){
     for(int i=0;i<Q;i++){
         int q;
         cin>>q;
+        
         cout<<ans[q]<<"\n";
     }
 }
@@ -96,7 +80,7 @@ int main(){
 2 5 6
 2 3 2
 2 4 3
-6 7 3
+6 7 6
 6 5 6
 2
 7
@@ -104,5 +88,8 @@ int main(){
 5
 6
 3
+
+
+6 7 3
 
 */

@@ -25,15 +25,26 @@ int main() {
     int N, Q;
     cin >> N >> Q;
 
-    int ans = N;
+    int ans = N+1;
     for (int i = 1; i <= N; i++) parent[i] = i;
     while (Q--) {
         int u, v;
         cin >> u >> v;
 
         if (merge(u, v) == true) ans--;
-
-        cout << ans << '\n';
     }
+    cout << ans << '\n';
     return 0;
 }
+
+/*
+7 7
+1 0
+0 2
+5 3
+3 4
+6 7
+
+6 5
+3 6
+*/
