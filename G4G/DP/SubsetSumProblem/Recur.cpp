@@ -19,8 +19,12 @@ bool isSubsetSum(int set[], int n, int sum, int dep)
 
     // If last element is greater than sum,
     // then ignore it
+    //
+    // for tabulation
+    //   set[i-1]  >  j
     if (set[n - 1] > sum){
         cerr<<"greater -> ignore\n";
+        // skip
         return isSubsetSum(set, n - 1, sum, dep);
     }
 
@@ -39,6 +43,7 @@ int main()
 
     int set[] = { 3, 34, 4, 12, 5, 2 };
     int sum = 9;
+    
     int n = sizeof(set) / sizeof(set[0]);
     if (isSubsetSum(set, n, sum, dep) == true)
          cout <<"Found a subset with given sum";
