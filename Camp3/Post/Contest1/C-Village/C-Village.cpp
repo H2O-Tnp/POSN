@@ -3,8 +3,8 @@ using namespace std;
 
 const int MAX_N = 1e5+5;
 vector<int> adj[MAX_N];
+vector<int> arr(MAX_N);
 bool visit[MAX_N];
-int edge_cnt[MAX_N];
 
 int main(){
     int N;cin>>N;
@@ -13,52 +13,29 @@ int main(){
         cin>>a>>b;
         adj[a].emplace_back(b); edge_cnt[a]++;
         adj[b].emplace_back(a); edge_cnt[b]++;
+        arr[a]=a;
     }
     //          start stop
     map<int,int> link;
-    for(int i=1;i<=N;i++){
-        
-        for(int j=1;j<=N;j++){
-            cout<<link[j]<<' ';
-        } cout<<"\n";
 
-        cout<<"node "<<i<<"\n";
+    stack<int> st;
+    st.emplace(0);
+    while(!st.empty()){
+        int u = st.top();
+        st.pop();
+        if(visit[u]) continue;
+        visit[u]=true;
 
-        // leaf
-        if(edge_cnt[i]==1){
-            cout<<"leaf\n";
-            int adj_node = adj[i].front();
-            if(visit[adj_node]){
-                cout<<"ex leaf\n";
-                // do somethings
-                visit[i]=true;
-                
-                for(auto u:adj[adj_node]){
-                    if(u==i) continue;
-                    if(edge_cnt[u]==1){
-                        cout<<"pair ex leaf\n";
-                        cout<<i<<"->"<<adj_node<<"\n";
-                        cout<<u<<"->"<<i<<"\n";
-                        edge_cnt[u]++;
-                        link[i]=adj_node;
-                        link[u]=i;
-                        break;
-                    }
-                }
-                continue;
-            }
+        if(adj[u].size()==1){ // leaf
+            int v = adj[u].top();
+            arr[u] = v;
+            arr[v] = u;
         }
-        if(visit[i]) continue;
-        for(auto u:adj[i]){
-            cout<<"normal link\n";
-            if(visit[u]) continue;
-            link[i]=u; visit[i] = true;
-            link[u]=i; visit[u] = true;
-            break;
+
+        for(auto v:adj[u]){
+            
         }
-        
     }
-    cout<<"\n";
 
     for(int j=1;j<=N;j++){
         cout<<link[j]<<' ';
