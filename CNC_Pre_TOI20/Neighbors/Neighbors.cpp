@@ -7,15 +7,30 @@ bool nb[MAXN];
 bool visited[MAXN];
 int dis[MAXN];
 
-// vector<int> nb_check;
+int maxd;
+
+void dfs(int u) {
+    for (auto [v,w] : adj[u]) {
+        if(visited[v]) continue;
+        visited[v] = true;
+        dis[v] = w + dis[u];
+        // ! neighbor
+        if(!nb[v]){
+            dfs(v);
+        } else {
+            maxd = max(maxd,dis[v]);
+        }
+    }
+}
 
 int main(){
+    cin.tie(0)->sync_with_stdio(0);
     int N,Q;
     cin>>N>>Q;
-    for(int i=1;i<= N;i++){
+    for(int i=0;i< N  ;i++){
         cin>>nb[i];
     }
-    for(int i=1;i<  N;i++){
+    for(int i=0;i< N-1;i++){
         int u,v,w;
         cin>>u>>v>>w;
         adj[u].emplace_back(v,w);
@@ -25,29 +40,18 @@ int main(){
     // query
     while(Q--){
         int X; cin>>X;
-        //dijkstra
-        //                   w  node
-        for(int i=1;i<= N;i++){
-            dis[i] = INT_MAX;
+        if(nb[X]){
+            cout<<0<<"\n";
+            continue;
+        }
+        for(int i=0;i< N;i++){
+            dis[i] = INT_MIN;
             visited[i] = false;
         }
-        cout<<"test\n";
-        priority_queue<pair<int,int>> pq;
-        pq.emplace(0,X);
+        maxd=INT_MIN;
         dis[X] = 0;
-        while(!pq.empty()){
-            auto [uw,u] = pq.top();
-            if(visited[u]) continue;
-            visited[u] = true;
-
-            for(auto [vw,v] : adj[u]){
-                if(vw + dis[u] > dis[v]){
-                    dis[v] = vw + dis[u];
-                    if(!nb[u]){
-                        pq.emplace(dis[v],v);
-                    }
-                }
-            }
-        }
+        visited[X] = true;
+        dfs(X);
+        cout<<maxd<<"\n";
     }
 }
